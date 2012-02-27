@@ -2,7 +2,7 @@
 #
 # Archive, Compress, Encrypt, Backup
 #
-# This script takes folders that it compresses to tar.gz, encrypts with openssl & des3 
+# This script takes folders that it compresses to tar.gz, encrypts with openssl & des3
 # and uses rsync to transfer to a remote filesystem.
 #
 # @author Rok Andrée <rok@andree.si>
@@ -47,7 +47,7 @@ done
 #
 # Transfer files
 #
-rsync -qr  --include="*/" --include="*.des3" --exclude="*" $tmppath $remotepath
+rsync -qr  --include="*/" --include="*.des3" --exclude="*" $tmppath $backuppath
 
 #
 # Cleanup
