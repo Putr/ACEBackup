@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# Archive, Compress, Encrypt, Backup
+#
+# This script takes folders that it compresses to tar.gz, encrypts with openssl & des3 
+# and uses rsync to transfer to a remote filesystem.
+#
+# @author Rok Andrée <rok@andree.si>
+# @link http://kanaria.si
+# @license GNU General Public License v3.0
+
+source main.cfg
+
+#############################
+#
+# CODE
+#
+#############################
+# Encrypt
+# @param $1 Password to use
+# @param $2 File to encrypt
+function encrypt {
+	openssl des3 -a -pass pass:$1 -in $2 -out $2.des3
+}
+
+cd $tmppath
+#
+# START COMPRESSION
+#
+# @note  we could use the "h" option to folow symlinks
+# and not have to use config file.. just symlink stuff into a folder
+
+for i in "${!data[@]}"
+do
+	dir=${data[$i]}
+	name=$i
+	if [[ -e $dir"/"$name ]]; then tar czf $id.$name.$suffix -C $dir $name; fi
+done
+#
+# START ENCRYPTION
+#
+
+for i in "${!data[@]}"
+do
+	encrypt $pass $id.$i.$suffix
+done
+#
+# Transfer files
+#
+rsync -qr  --include="*/" --include="*.des3" --exclude="*" $tmppath $remotepath
+
+#
+# Cleanup
+#
+rm $tmppath/*

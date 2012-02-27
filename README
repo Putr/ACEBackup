@@ -1,8 +1,8 @@
-######### Warning
+# Warning
 This script copys the entire contents of the backup each time it is run so
 havey traffic can accure.
 
-######### INSTALL
+# INSTALL
 Open the main file and configure the first section. Run normally. Add to cron.
 
 You will need:
@@ -10,7 +10,7 @@ List of folders to backup
 Temporary folder to store temporary files
 Location to store backups
 
-######### Decryption howto:
+# Decryption howto:
 Create file /usr/local/bin/decrypt with the folowing lines (dont add the comment #)
 
 ---- cut here ----
