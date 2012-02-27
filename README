@@ -1,17 +1,24 @@
+# Archive, Compress, Encrypt, Backup
+
+ This script takes folders that it compresses to tar.gz, encrypts with openssl & des3 
+ and uses rsync to transfer to a remote filesystem.
+
 # Warning
 This script copys the entire contents of the backup each time it is run so
-havey traffic can accure.
+heavy traffic can accrue.
 
 # INSTALL
-Open the main file and configure the first section. Run normally. Add to cron.
+Open the main.cfg file and configure. Run normally.
 
 You will need:
 List of folders to backup
 Temporary folder to store temporary files
 Location to store backups
 
-# Decryption howto:
-Create file /usr/local/bin/decrypt with the folowing lines (dont add the comment #)
+This script works with cron. Easyest way is to symlink (ln -s) it to the /etc/cron.daily folder
+
+# RESTORE
+Create file /usr/local/bin/decrypt with the folowing lines
 
 ---- cut here ----
 #!/bin/bash
